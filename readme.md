@@ -10,8 +10,7 @@ This module provides a client for managing groups across multiple nodes in a clu
 4. When deleting a group, it should be deleted from all nodes.
 5. Create group fails if the group already exist in the node.
 6. Delete returns 200 even if the group doesn't exist.
-7. A timeout of 5 seconds is sufficient for API requests.
-8. Logging is used to track operations and errors.
+7. Logging is used to track operations and errors.
 
 ## How Cluster CLient works
 
@@ -119,3 +118,14 @@ graph TD
 #### Re-run failed rollbacks
 
 > python -m app.main rollback
+
+## Run Tests
+
+Tests are written using pytest.
+To run the tests, install test-requirements.txt
+
+> pip install -r test-requirements.txt
+
+Then run pytest command on the root folder
+
+> pytest
