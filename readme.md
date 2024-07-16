@@ -81,11 +81,11 @@ graph TD
 
 The arguments simulate, max_retries, and retry_timeout are configured as optional parameters. They can be set while running the app. If no values are provided for these parameters, the following default values will be used:
 
-simulate = True
+> simulate = True
 
-max_retries = 2
+> max_retries = 2
 
-retry_timeout = 1
+> retry_timeout = 1
 
 ### Run on Kubernetes Cluster
 
