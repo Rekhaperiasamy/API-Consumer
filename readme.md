@@ -63,15 +63,15 @@ graph TD
 
 #### Create Group
 
-> python -m app.main --operation=create, --group_name=group_name
+> python -m app.main --operation=create --group_name=group_name
 
 #### Delete Group
 
-> python -m app.main --operation=delete, --group_name=group_name
+> python -m app.main --operation=delete --group_name=group_name
 
 #### Check Cluster Group Status
 
-> python -m app.main --operation=status, --group_name=group_name
+> python -m app.main --operation=status --group_name=group_name
 
 #### Re-run failed rollbacks
 
@@ -99,7 +99,7 @@ retry_timeout = 1
 
 #### Push the image to docker registry
 
-> docker push your-dockerhub-username/my-python-app:latest
+> docker push your-dockerhub-username/cluster-client-app:latest
 
 #### Start kubernetes deployment
 
@@ -115,15 +115,15 @@ retry_timeout = 1
 
 #### Create Group
 
-> python -m app.main --operation=create, --group_name=group_name
+> python -m app.main --operation=create --group_name=group_name
 
 #### Delete Group
 
-> python -m app.main --operation=delete, --group_name=group_name
+> python -m app.main --operation=delete --group_name=group_name
 
 #### Check Cluster Group Status
 
-> python -m app.main --operation=status, --group_name=group_name
+> python -m app.main --operation=status --group_name=group_name
 
 #### Re-run failed rollbacks
 

@@ -96,7 +96,7 @@ def main():
     parser = argparse.ArgumentParser(description="Manage cluster groups.")
     parser.add_argument('--operation', type=str, choices=[
                         'create', 'delete', 'status', 'rollback'], required=True, help="The operation to perform on the group: create, delete, status or rollback")
-    parser.add_argument('--group_name', type=str, required=True,
+    parser.add_argument('--group_name', type=str,
                         help="The name of the group to create or delete")
     parser.add_argument('--simulate', type=bool, default=True,
                         help="Simulate the operations (default: True)")
@@ -111,6 +111,10 @@ def main():
     simulate = args.simulate
     max_retries = args.max_retries
     retry_timeout = args.retry_timeout
+
+    if operation in ['create', 'delete', 'status'] and not group_name:
+        parser.error(
+            "--group_name is required for create, delete, and status operations.")
 
     hosts = read_hosts_file(hosts_file_path)
     if not hosts:
