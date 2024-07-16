@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-client-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-client-app
+  template:
+    metadata:
+      labels:
+        app: cluster-client-app
+    spec:
+      containers:
+      - name: cluster-client-container
+        image: rekhaperiasamy/cluster-client-app:latest
+        command: ["tail", "-f", "/dev/null"]
+        imagePullPolicy: Always
