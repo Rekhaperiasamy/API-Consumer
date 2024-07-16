@@ -63,19 +63,29 @@ graph TD
 
 #### Create Group
 
-> python -m app.main create, group_name
+> python -m app.main --operation=create, --group_name=group_name
 
 #### Delete Group
 
-> python -m app.main delete, group_name
+> python -m app.main --operation=delete, --group_name=group_name
 
 #### Check Cluster Group Status
 
-> python -m app.main status, group_name
+> python -m app.main --operation=status, --group_name=group_name
 
 #### Re-run failed rollbacks
 
-> python -m app.main rollback
+> python -m app.main --operation=rollback
+
+### Optional Arguments
+
+The arguments simulate, max_retries, and retry_timeout are configured as optional parameters. They can be set while running the app. If no values are provided for these parameters, the following default values will be used:
+
+simulate = True
+
+max_retries = 2
+
+retry_timeout = 1
 
 ### Run on Kubernetes Cluster
 
@@ -105,19 +115,19 @@ graph TD
 
 #### Create Group
 
-> python -m app.main create, group_name
+> python -m app.main --operation=create, --group_name=group_name
 
 #### Delete Group
 
-> python -m app.main delete, group_name
+> python -m app.main --operation=delete, --group_name=group_name
 
 #### Check Cluster Group Status
 
-> python -m app.main status, group_name
+> python -m app.main --operation=status, --group_name=group_name
 
 #### Re-run failed rollbacks
 
-> python -m app.main rollback
+> python -m app.main --operation=rollback
 
 ## Run Tests
 

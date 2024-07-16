@@ -94,23 +94,31 @@ def perform_operation(client, operation, group_name):
 
 def main():
     parser = argparse.ArgumentParser(description="Manage cluster groups.")
-    parser.add_argument('operation', type=str, choices=[
-                        'create', 'delete', 'status', 'rollback'], help="The operation to perform on the group: create or delete")
-    parser.add_argument('group_name', type=str,
+    parser.add_argument('--operation', type=str, choices=[
+                        'create', 'delete', 'status', 'rollback'], required=True, help="The operation to perform on the group: create, delete, status or rollback")
+    parser.add_argument('--group_name', type=str, required=True,
                         help="The name of the group to create or delete")
-
+    parser.add_argument('--simulate', type=bool, default=True,
+                        help="Simulate the operations (default: True)")
+    parser.add_argument('--max_retries', type=int, default=2,
+                        help="Maximum number of retries (default: 2)")
+    parser.add_argument('--retry_timeout', type=int, default=1,
+                        help="Retry timeout in seconds (default: 1)")
     args = parser.parse_args()
 
     group_name = args.group_name
     operation = args.operation
+    simulate = args.simulate
+    max_retries = args.max_retries
+    retry_timeout = args.retry_timeout
 
     hosts = read_hosts_file(hosts_file_path)
     if not hosts:
         logger.error("No hosts found in hosts.txt")
         return
 
-    client = ClusterClient(hosts, simulate=True,
-                           max_retries=2, retry_timeout=1, rollback_file=rollback_file_path)
+    client = ClusterClient(hosts, simulate=simulate,
+                           max_retries=max_retries, retry_timeout=retry_timeout, rollback_file=rollback_file_path)
 
     perform_operation(client=client, operation=operation,
                       group_name=group_name)
