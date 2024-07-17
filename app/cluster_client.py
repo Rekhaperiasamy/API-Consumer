@@ -102,6 +102,7 @@ class ClusterClient:
 
         url = self.base_url.format(host)
         data = {"groupId": group_id}
+        backoff = self.retry_timeout
 
         for attempt in range(self.max_retries):
             try:
@@ -119,7 +120,8 @@ class ClusterClient:
             except httpx.RequestError as e:
                 logger.info(
                     f"create attempt {attempt + 1} failed for host {host}. Retrying...")
-            time.sleep(self.retry_timeout)
+            time.sleep(backoff)
+            backoff *= 2
         return False
 
     def _make_delete_request(self, host: str, group_id: str) -> bool:
@@ -128,6 +130,7 @@ class ClusterClient:
 
         url = self.base_url.format(host)
         data = {"groupId": group_id}
+        backoff = self.retry_timeout
 
         for attempt in range(self.max_retries):
             try:
@@ -140,7 +143,8 @@ class ClusterClient:
             except Exception as e:
                 logger.info(
                     f"delete attempt {attempt + 1} failed for host {host}. Retrying...")
-            time.sleep(self.retry_timeout)
+            time.sleep(backoff)
+            backoff *= 2
         return False
 
     def _make_get_request(self, host: str, group_id: str) -> bool:
@@ -148,6 +152,7 @@ class ClusterClient:
             return random.choice([True, False])
 
         url = f"{self.base_url.format(host)}/{group_id}"
+        backoff = self.retry_timeout
 
         for attempt in range(self.max_retries):
             try:
@@ -163,5 +168,6 @@ class ClusterClient:
             except httpx.RequestError as e:
                 logger.info(
                     f"Get attempt {attempt + 1} failed for host {host}. Retrying...")
-            time.sleep(self.retry_timeout)
+            time.sleep(backoff)
+            backoff *= 2
         return False
